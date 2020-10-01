@@ -10,18 +10,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         // Combiner
-        HStack() {
+        HStack {
             // Combiner view with an interator
             ForEach(0..<4) { index in
-                // Combiner layout view to build complex views
-                ZStack() {
-                    // Rounded Rectangle behavies like a view and a shape
-                    RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                    // Stroke returns a view to use in the ZStack
-                    RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
-                    // Text has an implicit parameter type
-                    Text("👻")
-                }
+                CardView()
             }
         }
             // Gets passed down to views inside the ZStack
@@ -30,6 +22,20 @@ struct ContentView: View {
             .padding()
             // Apllies to all text in the ZStack
             .font(Font.largeTitle)
+    }
+}
+
+struct CardView: View {
+    var body: some View {
+        // Combiner layout view to build complex views
+        ZStack {
+            // Rounded Rectangle behavies like a view and a shape
+            RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
+            // Stroke returns a view to use in the ZStack
+            RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+            // Text has an implicit parameter type
+            Text("👻")
+        }
     }
 }
 
