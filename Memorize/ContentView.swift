@@ -10,20 +10,20 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         // Combiner
-        HStack(content: {
+        HStack() {
             // Combiner view with an interator
-            ForEach(0..<4, content: { index in
+            ForEach(0..<4) { index in
                 // Combiner layout view to build complex views
-                ZStack(content: {
+                ZStack() {
                     // Rounded Rectangle behavies like a view and a shape
                     RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
                     // Stroke returns a view to use in the ZStack
                     RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
                     // Text has an implicit parameter type
                     Text("👻")
-                })
-            })
-        })
+                }
+            }
+        }
             // Gets passed down to views inside the ZStack
             .foregroundColor(Color.orange)
             // Applies to the ZStack
