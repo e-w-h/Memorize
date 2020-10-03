@@ -10,9 +10,7 @@ import SwiftUI
 class EmojiMemoryGame {
     // private(set) allows multiple views to look at but not change the model
     // Closure - inlining a function in Swift
-    private var game: MemoryGame<String> = MemoryGame<String>(numberOfPairsOfCards: 2, cardContentFactory: { (pairIndex: Int) -> String in
-        return "😀"
-    })
+    private var game: MemoryGame<String> = MemoryGame<String>(numberOfPairsOfCards: 2) { _ in "😀" }
     
     // MARK: - Access to the Model
     
