@@ -12,7 +12,15 @@ class EmojiMemoryGame {
     // Closure - inlining a function in the functional language Swift
     // Type inference in a strongly typed language removes the need for restating types
     // Use the underbar (_) when the variable isnt used in the function
-    private var game: MemoryGame<String> = MemoryGame<String>(numberOfPairsOfCards: 2) { _ in "😀" }
+    private var game: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    
+    // Static functions get sent to the type
+    static func createMemoryGame() -> MemoryGame<String> {
+        let emojis: Array<String> = ["👻", "🎃"]
+        return MemoryGame<String>(numberOfPairsOfCards: 2) {pairIndex in
+            return emojis[pairIndex]
+        }
+    }
     
     // MARK: - Access to the Model
     
