@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    var viewModel: EmojiMemoryGame
+    
     var body: some View {
+        // Pointer to the class EmojiMemoryGame
         // Combiner
         HStack {
             // Combiner view with an interator
-            ForEach(0..<4) { index in
-                CardView(isFaceUp: false)
+            ForEach(viewModel.cards) { card in
+                CardView(card: card)
             }
         }
             // Gets passed down to views inside the ZStack
@@ -26,17 +29,18 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    var isFaceUp: Bool
+    var card: MemoryGame<String>.Card
+    
     var body: some View {
         // Combiner layout view to build complex views
         ZStack {
-            if isFaceUp {
+            if card.isFaceUp {
                 // Rounded Rectangle behavies like a view and a shape
                 RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
                 // Stroke returns a view to use in the ZStack
                 RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
                 // Text has an implicit parameter type
-                Text("👻")
+                Text(card.content)
             } else {
                 RoundedRectangle(cornerRadius: 10.0).fill()
             }
@@ -47,6 +51,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: EmojiMemoryGame())
     }
 }
