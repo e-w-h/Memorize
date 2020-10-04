@@ -31,6 +31,7 @@ struct EmojiMemoryGameView: View {
     }
 }
 
+// Swift is declarative and we're declaring how the UI looks
 struct CardView: View {
     var card: MemoryGame<String>.Card
     
@@ -41,19 +42,27 @@ struct CardView: View {
             ZStack {
                 if card.isFaceUp {
                     // Rounded Rectangle behavies like a view and a shape
-                    RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
+                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                     // Stroke returns a view to use in the ZStack
-                    RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                     // Text has an implicit parameter type
                     Text(card.content)
                 } else {
-                    RoundedRectangle(cornerRadius: 10.0).fill()
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
                 }
             }
             // Apllies to all text in the ZStack
-            .font(Font.system(size: min(geometry.size.width, geometry.size.height)))
+            .font(Font.system(size: min(geometry.size.width, geometry.size.height)) * fontScaleFactor)
         }
     }
+    
+    // MARK: - Drawing Constants
+    
+    // Using vars, lets and funcs to make the code as clean and understandable as possible
+    // In simple terms, we're replacing all the blue numbers with names and concepts
+    let cornerRadius: CGFloat = 10.0
+    let edgeLineWidth: CGFloat = 3
+    let fontScaleFactor: CGFloat = 0.75
 }
 
 struct ContentView_Previews: PreviewProvider {
