@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     // private(set) allows multiple views to look at but not change the model
     // Closure - inlining a function in the functional language Swift
     // Type inference in a strongly typed language removes the need for restating types
     // Use the underbar (_) when the variable isnt used in the function
-    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     // Static functions get sent to the type
     static func createMemoryGame() -> MemoryGame<String> {
