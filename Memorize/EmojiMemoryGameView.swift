@@ -14,14 +14,10 @@ struct EmojiMemoryGameView: View {
     
     // body is called by the system and will never be referenced
     var body: some View {
-        // Pointer to the class EmojiMemoryGame
-        // Combiner
-        HStack {
-            // Combiner view with an interator
-            ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    viewModel.choose(card: card)
-                }
+        // Grid can be thought of as a 2D HStack
+        Grid(viewModel.cards) { card in
+            CardView(card: card).onTapGesture {
+                viewModel.choose(card: card)
             }
         }
             // Applies to the ZStack
