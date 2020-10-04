@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Eric Hou on 10/1/20.
@@ -7,22 +7,25 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     var viewModel: EmojiMemoryGame
     
+    // body is called by the system and will never be referenced
     var body: some View {
         // Pointer to the class EmojiMemoryGame
         // Combiner
         HStack {
             // Combiner view with an interator
             ForEach(viewModel.cards) { card in
-                CardView(card: card)
+                CardView(card: card).onTapGesture {
+                    viewModel.choose(card: card)
+                }
             }
         }
-            // Gets passed down to views inside the ZStack
-            .foregroundColor(Color.orange)
             // Applies to the ZStack
             .padding()
+            // Gets passed down to views inside the ZStack
+            .foregroundColor(Color.orange)
             // Apllies to all text in the ZStack
             .font(Font.largeTitle)
     }
@@ -51,6 +54,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
