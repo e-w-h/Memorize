@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    var viewModel: EmojiMemoryGame
+    // This var has an observable object and redraws the view whenever the var is changed (reactive)
+    // For the sake of resources SwiftUI reacts only to the change and doesnt change everything 
+    @ObservedObject var viewModel: EmojiMemoryGame
     
     // body is called by the system and will never be referenced
     var body: some View {
