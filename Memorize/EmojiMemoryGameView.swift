@@ -36,24 +36,28 @@ struct CardView: View {
     var card: MemoryGame<String>.Card
     
     var body: some View {
-        //
+        // Wrapper view that stores the offered space to a var
         GeometryReader { geometry in
-            // Combiner layout view to build complex views
-            ZStack {
-                if card.isFaceUp {
-                    // Rounded Rectangle behavies like a view and a shape
-                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                    // Stroke returns a view to use in the ZStack
-                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                    // Text has an implicit parameter type
-                    Text(card.content)
-                } else {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
-                }
-            }
-            // Apllies to all text in the ZStack
-            .font(Font.system(size: min(geometry.size.width, geometry.size.height)) * fontScaleFactor)
+            body(for: geometry.size)
         }
+    }
+    
+    func body(for size: CGSize) -> some View {
+        // Combiner layout view to build complex views
+        ZStack {
+            if card.isFaceUp {
+                // Rounded Rectangle behavies like a view and a shape
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                // Stroke returns a view to use in the ZStack
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                // Text has an implicit parameter type
+                Text(card.content)
+            } else {
+                RoundedRectangle(cornerRadius: cornerRadius).fill()
+            }
+        }
+        // Apllies to all text in the ZStack
+        .font(Font.system(size: min(geometry.size.width, geometry.size.height)) * fontScaleFactor)
     }
     
     // MARK: - Drawing Constants
