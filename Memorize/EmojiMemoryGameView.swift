@@ -15,8 +15,9 @@ struct EmojiMemoryGameView: View {
     // body is called by the system and will never be referenced
     var body: some View {
         // Grid can be thought of as a 2D HStack
-        Grid(viewModel.cards) { card in
+        Grid(items: viewModel.cards) { card in
             CardView(card: card).onTapGesture {
+                // Doesnt need self because a struct is a value type and doesnt live in the heap
                 viewModel.choose(card: card)
             }
         }
