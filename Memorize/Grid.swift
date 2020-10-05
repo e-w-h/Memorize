@@ -19,8 +19,19 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
     
     var body: some View {
-        ForEach(items) { item in
-            self.viewForItem(item)
+        // Figure out how much space has been allocated with the view
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
         }
+    }
+    
+    func body(for size: CGSize) -> some View {
+        ForEach(items) { item in
+            self.body(for: item, in: size)
+        }
+    }
+    
+    func body(for item: Item, in size: CGSize) -> some View {
+        return viewForItem(item)
     }
 }
