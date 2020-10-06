@@ -45,6 +45,13 @@ struct GridLayout{
     }
     
     func location(ofItemAt index: Int) -> CGPoint {
-        
+        if rowCount == 0 || columnCount == 0 {
+            return CGPoint.zero
+        } else {
+            return CGPoint(
+                x: (CGFloat(index & columnCount) + 0.5) * itemSize.width,
+                y: (CGFloat(index / columnCount) + 0.5) * itemSize.height
+            )
+        }
     }
 }
