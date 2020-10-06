@@ -34,7 +34,14 @@ struct GridLayout{
     }
     
     var itemSize: CGSize {
-        
+        if rowCount == 0 || columnCount == 0 {
+            return CGSize.zero
+        } else {
+            return CGSize(
+                width: size.width / CGFloat(columnCount),
+                height: size.height / CGFloat(rowCount)
+            )
+        }
     }
     
     func location(ofItemAt index: Int) -> CGPoint {
