@@ -22,20 +22,20 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
         // Figure out how much space has been allocated with the view
         GeometryReader { geometry in
             // GeometryReader is escaping so we need self.body
-            self.body(for: geometry.size)
+            self.body(for: GridLayout(itemCount: self.items.count, in: geometry.size))
         }
     }
     
     // func so we can access self thats within scope
-    func body(for size: CGSize) -> some View {
+    func body(for layout: GridLayout) -> some View {
         ForEach(items) { item in
             // ForEach is escaping so we need self.body
-            self.body(for: item, in: size)
+            self.body(for: item, in: layout)
         }
     }
     
     // func so we dont need self
-    func body(for item: Item, in size: CGSize) -> some View {
+    func body(for item: Item, in layout: GridLayout) -> some View {
         return viewForItem(item)
     }
 }
