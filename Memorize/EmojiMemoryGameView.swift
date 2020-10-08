@@ -55,7 +55,7 @@ struct CardView: View {
             }
         }
         // Apllies to all text in the ZStack
-        .font(Font.system(size: min(geometry.size.width, geometry.size.height)) * fontScaleFactor)
+        .font(Font.system(size: fontSize(for: size)))
     }
     
     // MARK: - Drawing Constants
