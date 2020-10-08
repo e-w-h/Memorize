@@ -7,13 +7,31 @@
 
 import Foundation
 
-struct MemoryGame<CardContent> {
+// Constrains and gains for comparing two generics to be equatable with == function
+struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
+    
+    // Use an optional which isn't set and gets initialized to nil
+    var indexOfTheOneAndOnlyFaceUpCard: Int?
     
     mutating func choose(card: Card) {
         print("card chosen: \(card)")
-        if let chosenIndex: Int = cards.firstIndex(matching: card) {
-            self.cards[chosenIndex].isFaceUp = !self.cards[chosenIndex].isFaceUp
+        // Comma is a sequential && which only executes the latter cases if the first case is true
+        if let chosenIndex: Int = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched {
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                // Using the equatable constraint so that we can compare the card contents
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                indexOfTheOneAndOnlyFaceUpCard = nil
+            } else {
+                for index in cards.indices {
+                    cards[index].isFaceUp = false
+                }
+                indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+            }
+            self.cards[chosenIndex].isFaceUp = true
         }
     }
     
