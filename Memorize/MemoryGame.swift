@@ -9,11 +9,12 @@ import Foundation
 
 // Constrains and gains for comparing two generics to be equatable with == function
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
+    // Setting is private but reading is not
+    private(set) var cards: Array<Card>
     
     // Use an optional which isn't set and gets initialized to nil
     // Use a computed var to avoid having state in two different places which can lead to errors
-    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
         set {
             for index in cards.indices {
@@ -24,6 +25,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
+    // Cant be private since its used for playing the game
     mutating func choose(card: Card) {
         print("card chosen: \(card)")
         // Comma is a sequential && which only executes the latter cases if the first case is true
@@ -41,6 +43,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
+    // Private inits exist but are rare
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         // Create an empty array of cards
         cards = Array<Card>()
@@ -51,6 +54,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
+    // The only way to get a card is through the cards array which is already private(set)
     struct Card: Identifiable {
         var isFaceUp: Bool = false
         var isMatched: Bool = false

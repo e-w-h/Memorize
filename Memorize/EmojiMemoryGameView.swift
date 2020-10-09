@@ -40,7 +40,8 @@ struct CardView: View {
         }
     }
     
-    func body(for size: CGSize) -> some View {
+    // Helper function can be private
+    private func body(for size: CGSize) -> some View {
         // Combiner layout view to build complex views
         ZStack {
             if card.isFaceUp {
@@ -64,9 +65,11 @@ struct CardView: View {
     
     // Using vars, lets and funcs to make the code as clean and understandable as possible
     // In simple terms, we're replacing all the blue numbers with names and concepts
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3
-    let fontScaleFactor: CGFloat = 0.75
+    private let cornerRadius: CGFloat = 10.0
+    private let edgeLineWidth: CGFloat = 3
+    private func fontSize(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * 0.75
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

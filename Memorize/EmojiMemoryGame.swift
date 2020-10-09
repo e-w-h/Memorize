@@ -15,7 +15,8 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     // Static functions get sent to the type
-    static func createMemoryGame() -> MemoryGame<String> {
+    // Dont want other components to create a new model
+    private static func createMemoryGame() -> MemoryGame<String> {
         let emojis = ["👻", "🎃"]
         // Type inference and closure cuts down the amount of code dramatically
         return MemoryGame<String>(numberOfPairsOfCards: emojis.count) { pairIndex in
@@ -31,6 +32,7 @@ class EmojiMemoryGame: ObservableObject {
     
     // MARK: - Intents
     
+    // Intents are inherently public
     func choose(card: MemoryGame<String>.Card) {
         model.choose(card: card)
     }
