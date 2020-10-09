@@ -14,29 +14,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // Use an optional which isn't set and gets initialized to nil
     // Use a computed var to avoid having state in two different places which can lead to errors
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
-        get {
-            var faceUpCardIndices = [Int]()
-            for index in cards.indices {
-                if cards[index].isFaceUp {
-                    faceUpCardIndices.append(index)
-                }
-            }
-            if faceUpCardIndices.count == 1 {
-                return faceUpCardIndices.first
-            } else {
-                return nil
-            }
-        }
+        get { cards.indices.filter { cards[$0].isFaceUp }.only }
         set {
             for index in cards.indices {
                 // newValue is a variable thats included in and unique to set
                 // newValue is the same value as whatever the variable is at the time set is called
-                if index == newValue {
-                    // since the variable is an optional it can equal nil
-                    cards[index].isFaceUp = true
-                } else {
-                    cards[index].isFaceUp = false
-                }
+                cards[index].isFaceUp = index == newValue
             }
         }
     }
