@@ -51,7 +51,9 @@ struct CardView: View {
                 // Text has an implicit parameter type
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
+                if !card.isMatched {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
         }
         // Apllies to all text in the ZStack

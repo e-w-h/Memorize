@@ -12,7 +12,34 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
     
     // Use an optional which isn't set and gets initialized to nil
-    var indexOfTheOneAndOnlyFaceUpCard: Int?
+    // Use a computed var to avoid having state in two different places which can lead to errors
+    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            if faceUpCardIndices.count == 1 {
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+        }
+        set {
+            for index in cards.indices {
+                // newValue is a variable thats included in and unique to set
+                // newValue is the same value as whatever the variable is at the time set is called
+                if index == newValue {
+                    // since the variable is an optional it can equal nil
+                    cards[index].isFaceUp = true
+                } else {
+                    cards[index].isFaceUp = false
+                }
+            }
+        }
+    }
     
     mutating func choose(card: Card) {
         print("card chosen: \(card)")
@@ -24,14 +51,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
                 }
-                indexOfTheOneAndOnlyFaceUpCard = nil
+                self.cards[chosenIndex].isFaceUp = true
             } else {
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
-            self.cards[chosenIndex].isFaceUp = true
         }
     }
     
