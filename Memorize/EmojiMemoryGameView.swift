@@ -49,7 +49,7 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 // Stroke returns a view to use in the ZStack
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                Circle().padding(5).opacity(0.4)
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
                 // Text has an implicit parameter type
                 Text(card.content)
             } else {
