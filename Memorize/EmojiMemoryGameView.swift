@@ -49,6 +49,7 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 // Stroke returns a view to use in the ZStack
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                Circle()
                 // Text has an implicit parameter type
                 Text(card.content)
             } else {
@@ -72,8 +73,12 @@ struct CardView: View {
     }
 }
 
+// Creates a preview for our memory game
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+        // Change the preview conditions so that we can easily work on the circular background timer
+        let game = EmojiMemoryGame()
+        game.choose(card: game.cards[0])
+        return EmojiMemoryGameView(viewModel: game)
     }
 }
