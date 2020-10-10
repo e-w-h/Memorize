@@ -49,7 +49,7 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 // Stroke returns a view to use in the ZStack
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                Circle()
+                Circle().padding(5).opacity(0.4)
                 // Text has an implicit parameter type
                 Text(card.content)
             } else {
@@ -69,7 +69,7 @@ struct CardView: View {
     private let cornerRadius: CGFloat = 10.0
     private let edgeLineWidth: CGFloat = 3
     private func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * 0.75
+        min(size.width, size.height) * 0.7
     }
 }
 
