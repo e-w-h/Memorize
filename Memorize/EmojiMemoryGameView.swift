@@ -51,6 +51,8 @@ struct CardView: View {
                 // Text has an implicit parameter type
                 Text(card.content)
                     .font(Font.system(size: fontSize(for: size)))
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .cardify(isFaceUp: card.isFaceUp)
         }
