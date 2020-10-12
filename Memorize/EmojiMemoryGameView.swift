@@ -44,22 +44,13 @@ struct CardView: View {
     private func body(for size: CGSize) -> some View {
         // Combiner layout view to build complex views
         ZStack {
-            if card.isFaceUp {
-                // Rounded Rectangle behavies like a view and a shape
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                // Stroke returns a view to use in the ZStack
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
-                // Text has an implicit parameter type
-                Text(card.content)
-            } else {
-                if !card.isMatched {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
-                }
-            }
+            Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
+            // Text has an implicit parameter type
+            Text(card.content)
+                .font(Font.system(size: fontSize(for: size)))
         }
-        // Apllies to all text in the ZStack
-        .font(Font.system(size: fontSize(for: size)))
+        .modifier(Cardify(isFaceUp: card.isFaceUp))
+        //.cardify(isFaceUp: card.isFaceUp)
     }
     
     // MARK: - Drawing Constants
