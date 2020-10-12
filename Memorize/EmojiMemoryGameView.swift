@@ -40,16 +40,20 @@ struct CardView: View {
         }
     }
     
+    // Modifier for a function that returns a list of view or an empty view
+    @ViewBuilder
     // Helper function can be private
     private func body(for size: CGSize) -> some View {
-        // Combiner layout view to build complex views
-        ZStack {
-            Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
-            // Text has an implicit parameter type
-            Text(card.content)
-                .font(Font.system(size: fontSize(for: size)))
+        if card.isFaceUp || !card.isMatched {
+            // Combiner layout view to build complex views
+            ZStack {
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
+                // Text has an implicit parameter type
+                Text(card.content)
+                    .font(Font.system(size: fontSize(for: size)))
+            }
+            .cardify(isFaceUp: card.isFaceUp)
         }
-        .cardify(isFaceUp: card.isFaceUp)
     }
     
     // MARK: - Drawing Constants
