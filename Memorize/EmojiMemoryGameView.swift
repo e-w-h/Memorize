@@ -28,7 +28,9 @@ struct EmojiMemoryGameView: View {
                 // Gets passed down to views inside the ZStack
                 .foregroundColor(Color.orange)
             Button(action: {
-                viewModel.resetGame()
+                withAnimation(.easeInOut) {
+                    viewModel.resetGame()
+                }
             }, label: { Text("New Game") })
         }
     }
