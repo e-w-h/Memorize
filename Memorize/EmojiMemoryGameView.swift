@@ -18,8 +18,10 @@ struct EmojiMemoryGameView: View {
         VStack {
             Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
-                    // Doesnt need self because a struct is a value type and doesnt live in the heap
-                    viewModel.choose(card: card)
+                    withAnimation(.linear) {
+                        // Doesnt need self because a struct is a value type and doesnt live in the heap
+                        viewModel.choose(card: card)
+                    }
                 }
                 .padding(5)
             }
