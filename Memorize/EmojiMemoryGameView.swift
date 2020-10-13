@@ -15,17 +15,22 @@ struct EmojiMemoryGameView: View {
     // body is called by the system and will never be referenced
     var body: some View {
         // Grid can be thought of as a 2D HStack
-        Grid(viewModel.cards) { card in
-            CardView(card: card).onTapGesture {
-                // Doesnt need self because a struct is a value type and doesnt live in the heap
-                viewModel.choose(card: card)
+        VStack {
+            Grid(viewModel.cards) { card in
+                CardView(card: card).onTapGesture {
+                    // Doesnt need self because a struct is a value type and doesnt live in the heap
+                    viewModel.choose(card: card)
+                }
+                .padding(5)
             }
-            .padding(5)
+                // Applies to the ZStack
+                .padding()
+                // Gets passed down to views inside the ZStack
+                .foregroundColor(Color.orange)
+            Button(action: {
+                viewModel.resetGame()
+            }, label: { Text("New Game") })
         }
-            // Applies to the ZStack
-            .padding()
-            // Gets passed down to views inside the ZStack
-            .foregroundColor(Color.orange)
     }
 }
 
