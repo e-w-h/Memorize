@@ -28,15 +28,17 @@ struct Cardify: AnimatableModifier {
     // Content is whatever view the view modifier is being called on
     func body(content: Content) -> some View {
         ZStack {
-            if isFaceUp {
+            Group {
                 // Rounded Rectangle behavies like a view and a shape
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 // Stroke returns a view to use in the ZStack
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                 content
-            } else {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
+                .opacity(isFaceUp ? 1 : 0)  // Hides the view if the card is facedown
+            RoundedRectangle(cornerRadius: cornerRadius).fill()
+                .opacity(isFaceUp ? 0 : 1)
+
         }
         .rotation3DEffect(Angle.degrees(rotation), axis: (0, 1 , 0))
     }
