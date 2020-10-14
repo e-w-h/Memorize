@@ -73,10 +73,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     // how long this card has ever been face up
     private var faceUpTime: TimeInterval {
-        
+        if let lastFaceUpDate = self.lastFaceUpDate {
+            return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+        } else {
+            return pastFaceUpTime
+        }
     }
+    
     // the last time this card was turned face up (and is still face up)
     var lastFaceUpDate: Date?
+    
     // the accumulated time this card has been face up in the past
     var pastFaceUpTime: TimeInterval = 0
     
