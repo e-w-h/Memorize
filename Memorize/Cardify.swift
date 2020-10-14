@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct Cardify: ViewModifier {
-    var isFaceUp: Bool
+    var rotation: Double
+    
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+    
+    var isFaceUp: Bool {
+        rotation < 90
+    }
     
     // Content is whatever view the view modifier is being called on
     func body(content: Content) -> some View {
@@ -23,6 +31,7 @@ struct Cardify: ViewModifier {
                 RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
         }
+        .rotation3DEffect(Angle.degrees(rotation), axis: (0, 1 , 0))
     }
     
     private let cornerRadius: CGFloat = 10.0
