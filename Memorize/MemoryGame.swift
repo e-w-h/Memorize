@@ -88,7 +88,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     // how much time left before the bonus opportunity runs out
     var bonusTimeRemaining: TimeInterval {
-        
+        max(0, bonusTimeLimit - faceUpTime)
     }
     
     // percentage of the bonus time remaining
