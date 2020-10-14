@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Cardify: ViewModifier {
+struct Cardify: AnimatableModifier {
     var rotation: Double
     
     init(isFaceUp: Bool) {
