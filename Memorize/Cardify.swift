@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// AnimatableModifier is the same as saying ViewModifier, Animatable
 struct Cardify: AnimatableModifier {
     var rotation: Double
     
@@ -16,6 +17,12 @@ struct Cardify: AnimatableModifier {
     
     var isFaceUp: Bool {
         rotation < 90
+    }
+    
+    // Essentially renamed rotation to animatable data to something the animation system can recognize
+    var animatableData: Double {
+        get { return rotation }
+        set { rotation = newValue }
     }
     
     // Content is whatever view the view modifier is being called on
