@@ -93,12 +93,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     // percentage of the bonus time remaining
     var bonusRemaining: Double {
-        
+        (bonusTimeLimit > 0 && bonusTimeRemaining > 0) ? bonusTimeRemaining/bonusTimeLimit : 0
     }
     
     // whether the card was matched during the bonus time period
     var hasEarnedBonus: Bool {
-        
     }
     
     // whether we are currently face up, unmatched and have not yet used the bonus window
