@@ -80,6 +80,7 @@ struct CardView: View {
                     }
                 }
                 .padding(5).opacity(0.4)
+                .transition(.identity)
                 // Text has an implicit parameter type
                 Text(card.content)
                     .font(Font.system(size: fontSize(for: size)))
