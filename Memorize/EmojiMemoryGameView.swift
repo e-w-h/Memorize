@@ -56,7 +56,7 @@ struct CardView: View {
         if card.isFaceUp || !card.isMatched {
             // Combiner layout view to build complex views
             ZStack {
-                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90), clockwise: true).padding(5).opacity(0.4)
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusRemaining*360-90), clockwise: true).padding(5).opacity(0.4)
                 // Text has an implicit parameter type
                 Text(card.content)
                     .font(Font.system(size: fontSize(for: size)))
