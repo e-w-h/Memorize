@@ -57,7 +57,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     // The only way to get a card is through the cards array which is already private(set)
     struct Card: Identifiable {
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = false {
+            // Property observers (very reliable)
+            didSet {
+                if isFaceUp {
+                    startUsingBonusTime()
+                } else {
+                    stopUsingBonusTime()
+                }
+            }
+        }
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
